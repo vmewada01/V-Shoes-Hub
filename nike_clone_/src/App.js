@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import Homepage from './pages/Homepage';
 import { Box } from '@chakra-ui/react';
-import Navbar from './Navbar/Navbar';
+
+import AllRoutes from './Routes/AllRoutes';
 
 function App() {
   return (
     <Box >
-        <Navbar/>
-        <Homepage />
+        <AllRoutes />
     </Box>
   );
 }

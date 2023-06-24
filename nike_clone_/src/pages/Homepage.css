@@ -5,4 +5,55 @@
 
   .homepage-content{
     text-align: center;
+    margin-bottom: 2rem;
+  }
+  .featured{
+    
+    width: 95%;
+    margin : auto;
+    margin-bottom: 2rem;
+    
+  }
+  .featured-image{
+    margin: auto;
+    width: 95%;
+    position: relative;
+    margin-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+  .featured-image-text{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+  }
+ 
+  .trending{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 95%;
+    margin: auto;
+  }
+ .trending-image-1{
+  position: relative;
+ }
+
+ .navbar-bottom-content{
+  background-color: rgb(245, 245, 245);
+  text-align: center;
+    
+  margin: auto;
+}
+
+
+  @media only screen and (max-width: 765px) {
+    .featured-image-text{
+    display: none;
+      
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    .featured-image-button{
+      display: none;
+    }
   }

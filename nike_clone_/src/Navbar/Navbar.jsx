@@ -69,12 +69,7 @@ const Navbar = () => {
         </Box>
       </Box>
 
-      <Box className="navbar-bottom-content">
-      <Box>Hello Nike App</Box>
-      <Box fontSize="10px">Download the app to access everything Nike .<Text as="u">Get Your Great</Text></Box>
       </Box>
-    
-    </Box>
   );
 };
 

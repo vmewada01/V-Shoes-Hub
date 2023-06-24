@@ -2,6 +2,7 @@
   background-color: rgb(245, 245, 245);
   padding: 0.3rem;
   width: 100%;
+  
 }
 .top-navbar-signup {
   justify-content: right;
@@ -70,10 +71,4 @@
     transform: scale(1.1);
   }
 
-  .navbar-bottom-content{
-    background-color: rgb(245, 245, 245);
-    text-align: center;
-      
-    margin: auto;
-  }
 
