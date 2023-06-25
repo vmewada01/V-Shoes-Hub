@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Box,
   Button,
+  Checkbox,
   Flex,
   Grid,
   Heading,
@@ -22,8 +23,11 @@ import {
   getData,
   getfilterData,
   getfilterDataSortBy,
+  sortHighToLow,
+  sortLowToHigh,
 } from "../Redux/AppReducer/action";
 import ProductDisplayBox from "./ProductDisplayBox";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Products = () => {
   const [filter, setFilter] = useState(true);
@@ -32,16 +36,128 @@ const Products = () => {
   const data = useSelector((store) => store.AppReducer.products);
   // console.log(data);
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [order, setOrder] = useState("asc");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initcategoryParams = searchParams.getAll("category");
+  const initialBrandParams = searchParams.getAll("brand");
+  const [brand, setBrand] = useState(initialBrandParams || []);
+  const [category, setCategory] = useState(initcategoryParams || []);
+  const initialPage = searchParams.get("page") 
+  const location  = useLocation()
+  const initialRatingParams = searchParams.getAll('rating')
+  const [ rating,  setRating ] = useState(initialRatingParams || []); 
+  const [ page, setPage ] = useState(initialPage || 1)
+  let pageNo = searchParams.get('page')
+
 
   const handleSortBy = (e) => {
     setOrder(e.target.value);
   };
 
-  useEffect(() => {
-    dispatch(getfilterData(page, order));
-  }, [dispatch, page]);
+  if (order == "asc") {
+    // console.log(order)
+    dispatch(sortLowToHigh());
+  } else if (order == "dsc") {
+    dispatch(sortHighToLow());
+  }
+
+  const handleCategory = (e) => {
+    let value = e.target.value;
+    // console.log(value)
+    let newCategory = [...category];
+
+    if (category.includes(value)) {
+      newCategory.splice(newCategory.indexOf(value), 1);
+    } else {
+      newCategory.push(value);
+    }
+
+    setCategory(newCategory);
+  };
+
+
+   const handlebyBrand=(e)=> {
+     let value= e.target.value;
+     
+     let newBrand =[...brand]
+     if(brand.includes(value)){
+      newBrand.splice(newBrand.indexOf(value),1);
+     }
+     else{
+      newBrand.push(value)
+     }
+    setBrand(newBrand)
+   //console.log(newBrand)
+   }
+
+   const handleByRating = (e)=>{
+    let value = e.target.value 
+    //console.log(value) 
+   
+    let newRating = [...rating]
+    if(rating.includes(value))
+     {
+         newRating.splice(newRating.indexOf(value),1)
+     }
+     else{
+         newRating.push(value)
+     }
+    console.log(newRating)
+     setRating(newRating)
+             
+ }
+
+
+
+
+   useEffect(() => {
+   let params={}
+    if(category || brand || page || rating ){
+      category && (params.category=category)
+       brand && (params.brand=brand)
+      rating && (params.rating=rating)
+      // console.log(category)
+      // console.log(params.category)
+    }
+     console.log(params)
+   // console.log(pageNo)
+     setSearchParams(params)
+
+    //  console.log(category)
+    //  console.log(searchParams)
+  
+    //dispatch(getData(category));
+  }, [setSearchParams,category,brand,rating]);
+
+  // useEffect(()=> {
+  //   dispatch(getfilterData(page))
+
+  // },[page,dispatch,category])
+  useEffect(()=>{
+     console.log(location.search)
+     console.log(brand)
+    
+    if(location || data.length === 0)
+    {
+      
+      let q = {
+        params:{
+          category: searchParams.getAll('category'),
+           brand: searchParams.getAll('brand'),
+           rating_gte: searchParams.getAll('rating'),
+          // _sort : sort && "price",
+          // _order: sort,
+          _page: page,
+          _limit:9
+        }
+      }
+      //console.log(searchParams.getAll("brand"))
+      dispatch(getData(q))
+    }
+  },[location.search ,page])
+
+
 
   return (
     <Box width={"95%"} margin={"auto"}>
@@ -60,10 +176,20 @@ const Products = () => {
               size="md"
               onChange={handleSortBy}
               fontWeight="semibold"
-              placeholder="Sort By"
+              placeholder="SORT BY"
             >
-              <option value="asc">LOW TO HIGH RATING★</option>
-              <option value="dsc">HIGH TO LOW RATING★</option>
+              <option
+                style={{ backgroundColor: "black", color: "white" }}
+                value="asc"
+              >
+                LOW TO HIGH RATING★
+              </option>
+              <option
+                style={{ backgroundColor: "black", color: "white" }}
+                value="dsc"
+              >
+                HIGH TO LOW RATING★
+              </option>
             </Select>
           </Flex>
         </Flex>
@@ -83,21 +209,34 @@ const Products = () => {
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
+
                 <AccordionPanel pb={4}>
                   <Box>
-                    <input type="checkbox" />
+                    <Checkbox
+                      size="lg"
+                      value="men"
+                      onChange={handleCategory}
+                      defaultChecked={category.includes("men")}
+                    />
                     <label>Men</label>
                   </Box>
                   <Box>
-                    <input type="checkbox" />
+                    <Checkbox
+                      onChange={handleCategory}
+                      defaultChecked={category.includes("women")}
+                      value="women"
+                      type="checkbox"
+                    />
                     <label>Women</label>
                   </Box>
                   <Box>
-                    <input type="checkbox" />
+                    <Checkbox
+                      onChange={handleCategory}
+                      defaultChecked={category.includes("kids")}
+                      value="kids"
+                      type="checkbox"
+                    />
                     <label>Kids</label>
-                  </Box>
-                  <Box>
-                    <Button>Apply</Button>
                   </Box>
                 </AccordionPanel>
               </AccordionItem>
@@ -112,17 +251,25 @@ const Products = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                  <Box>
-                    <input type="checkbox" />
+                <Box>
+                    <Checkbox
+                      size="lg"
+                      value="Nike"
+                      onChange={handlebyBrand}
+                      defaultChecked={category.includes("Nike")}
+                    />
                     <label>Nike</label>
                   </Box>
                   <Box>
-                    <input type="checkbox" />
+                    <Checkbox
+                      onChange={handlebyBrand}
+                      defaultChecked={category.includes("Jordan")}
+                      value="Jordan"
+              
+                    />
                     <label>Jordan</label>
                   </Box>
-                  <Box>
-                    <Button>Apply</Button>
-                  </Box>
+                 
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
@@ -159,17 +306,25 @@ const Products = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                  <Box>
-                    <input type="checkbox" />
-                    <label>★3 & above </label>
+                <Box>
+                    <Checkbox
+                      size="lg"
+                      value="3"
+                      onChange={handleByRating}
+                      defaultChecked={rating.includes("3Above")}
+                    />
+                    <label>3 ★ & above</label>
                   </Box>
                   <Box>
-                    <input type="checkbox" />
-                    <label>★4 & above</label>
+                    <Checkbox
+                      onChange={handleByRating}
+                      defaultChecked={rating.includes("4Above")}
+                      value="4"
+                      
+                    />
+                    <label>4 ★ & above</label>
                   </Box>
-                  <Box>
-                    <Button>Apply</Button>
-                  </Box>
+                 
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>

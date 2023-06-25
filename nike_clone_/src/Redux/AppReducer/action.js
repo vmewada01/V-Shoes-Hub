@@ -2,17 +2,17 @@ import axios from "axios"
 import * as types from "./actionType" 
 
  
-// const getData= ()=> (dispatch)=> {
-//      dispatch({type: types.GET_DATA_REQUEST})
+const getData= (q)=> (dispatch)=> {
+     dispatch({type: types.GET_DATA_REQUEST})
  
-//     return axios.get("https://v-mock-server-api.onrender.com/products").then((res)=> {
+    return axios.get(`https://v-mock-server-api.onrender.com/products`,q).then((res)=> {
   
-//         const payload= res.data
-//         dispatch({type: types.GET_DATA_SUCCESS,payload})
-//     }).catch((err)=> {
-//         dispatch({type: types.GET_DATA_FAILURE})
-//     })
-// }
+        const payload= res.data
+        dispatch({type: types.GET_DATA_SUCCESS,payload})
+    }).catch((err)=> {
+        dispatch({type: types.GET_DATA_FAILURE})
+    })
+}
 
 const getfilterData= (page)=> (dispatch)=> {
     dispatch({type: types.GET_DATA_REQUEST})
@@ -33,6 +33,6 @@ export const sortLowToHigh= ()=> ({type: types.SORT_LOW_TO_HIGH})
 
 
 
-export { getfilterData}
+export {getData, getfilterData}
 
 

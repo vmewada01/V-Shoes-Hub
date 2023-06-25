@@ -9,6 +9,10 @@ const ProductDisplayBox = ({ item }) => {
       </Box>
       <Box>{item.title}</Box>
       <Box>
+        <Text as="b">{item.category}</Text>
+      </Box>
+
+      <Box>
         <Text as="b">{item.brand}</Text>
       </Box>
 

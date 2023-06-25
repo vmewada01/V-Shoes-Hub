@@ -7,7 +7,7 @@ import AllRoutes from './Routes/AllRoutes';
 
 function App() {
   return (
-    <Box >
+    <Box className='scroll' >
         <AllRoutes />
     </Box>
   );
