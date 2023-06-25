@@ -19,8 +19,8 @@
     border: 1px solid black;
     height: 200vh;
     overflow-y: scroll;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
     gap: 1rem;
     justify-content: center;
     align-items: center;

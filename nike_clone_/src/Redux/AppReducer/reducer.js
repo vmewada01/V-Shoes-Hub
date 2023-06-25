@@ -31,6 +31,31 @@ const reducer = (state = initialState, action) => {
         isError: true,
       };
     }
+    case types.RATING_LOW_TO_HIGH:{
+      return {
+        ...state,
+       products:  state.products.sort((a,b)=> a.rating-b.rating)
+      }
+    }
+    case types.RATING_HIGH_TO_LOW:{
+      return {
+        ...state,
+       products:  state.products.sort((a,b)=> b.rating-a.rating)
+      }
+    }
+    case types.SORT_HIGH_TO_LOW:{
+      return {
+        ...state,
+       products:  state.products.sort((a,b)=> b.price-a.price)
+      }
+    }
+
+    case types.SORT_LOW_TO_HIGH:{
+      return {
+        ...state,
+       products:  state.products.sort((a,b)=> a.price-b.price)
+      }
+    }
 
     default:
       return state;

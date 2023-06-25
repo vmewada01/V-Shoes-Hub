@@ -11,13 +11,18 @@ import {
   Heading,
   Input,
   Select,
+  border,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import "./Product.css";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../Redux/AppReducer/action";
+import {
+  getData,
+  getfilterData,
+  getfilterDataSortBy,
+} from "../Redux/AppReducer/action";
 import ProductDisplayBox from "./ProductDisplayBox";
 
 const Products = () => {
@@ -25,11 +30,18 @@ const Products = () => {
 
   const dispatch = useDispatch();
   const data = useSelector((store) => store.AppReducer.products);
-  console.log(data);
+  // console.log(data);
+
+  const [page, setPage] = useState(1);
+  const [order, setOrder] = useState("asc");
+
+  const handleSortBy = (e) => {
+    setOrder(e.target.value);
+  };
 
   useEffect(() => {
-    dispatch(getData());
-  }, []);
+    dispatch(getfilterData(page, order));
+  }, [dispatch, page]);
 
   return (
     <Box width={"95%"} margin={"auto"}>
@@ -43,11 +55,15 @@ const Products = () => {
               {filter ? "Hide Filter" : "Show Filter"}
             </Button>
 
-            <Select border='none' size='md'  fontWeight='semibold' placeholder="Sort By">
-              <option value="option1">Low to High</option>
-              <option value="option2">High to Low</option>
-              <option value="option3">a to z </option>
-              <option value="option3">z to a </option>
+            <Select
+              border="none"
+              size="md"
+              onChange={handleSortBy}
+              fontWeight="semibold"
+              placeholder="Sort By"
+            >
+              <option value="asc">LOW TO HIGH RATING★</option>
+              <option value="dsc">HIGH TO LOW RATING★</option>
             </Select>
           </Flex>
         </Flex>
@@ -164,9 +180,35 @@ const Products = () => {
         <Grid className="mainContent">
           {data.length > 0 &&
             data.map((item) => {
-              return <ProductDisplayBox item={item} />;
+              return <ProductDisplayBox key={item.id} item={item} />;
             })}
         </Grid>
+      </Flex>
+
+      <Flex margin={"1rem"} gap={"1rem"} justifyContent={"center"}>
+        <button
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            borderRadius: "5px",
+          }}
+          disabled={page == 1}
+          onClick={() => setPage(page - 1)}
+        >
+          Previous
+        </button>
+        <Button>{page}</Button>
+        <button
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            borderRadius: "5px",
+          }}
+          disabled={page == 4}
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
       </Flex>
     </Box>
   );
