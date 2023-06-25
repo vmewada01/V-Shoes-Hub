@@ -55,12 +55,7 @@ const Products = () => {
     setOrder(e.target.value);
   };
 
-  if (order == "asc") {
-    // console.log(order)
-    dispatch(sortLowToHigh());
-  } else if (order == "dsc") {
-    dispatch(sortHighToLow());
-  }
+  
 
   const handleCategory = (e) => {
     let value = e.target.value;
@@ -155,8 +150,23 @@ const Products = () => {
       //console.log(searchParams.getAll("brand"))
       dispatch(getData(q))
     }
-  },[location.search ,page])
+  },[location.search ,page, order])
 
+
+  if (order == "asc") {
+    // console.log(order)
+    //console.log(order)
+   data.sort((a,b)=> a.rating-b.rating)
+  } else if (order == "dsc") {
+    data.sort((a,b)=> b.rating-a.rating)
+  }
+  else if(order=='LTH'){
+    console.log(order)
+    data.sort((a,b)=> a.price-b.price )
+  }
+  else if(order=='HTL'){
+    data.sort((a,b)=> b.price-a.price)
+  }
 
 
   return (
@@ -189,6 +199,18 @@ const Products = () => {
                 value="dsc"
               >
                 HIGH TO LOW RATING★
+              </option>
+              <option
+                style={{ backgroundColor: "black", color: "white" }}
+                value="LTH"
+              >
+                LOW TO HIGH PRICE
+              </option>
+              <option
+                style={{ backgroundColor: "black", color: "white" }}
+                value="HTL"
+              >
+                HIGH TO LOW PRICE
               </option>
             </Select>
           </Flex>
@@ -272,29 +294,7 @@ const Products = () => {
                  
                 </AccordionPanel>
               </AccordionItem>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      Price
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Box>
-                    <input type="checkbox" />
-                    <label>Low</label>
-                  </Box>
-                  <Box>
-                    <input type="checkbox" />
-                    <label>High</label>
-                  </Box>
-                  <Box>
-                    <Button>Apply</Button>
-                  </Box>
-                </AccordionPanel>
-              </AccordionItem>
+              
 
               <AccordionItem>
                 <h2>
