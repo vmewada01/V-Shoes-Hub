@@ -29,11 +29,11 @@ function DrawerExample({isOpen,onClose}) {
 
 
             <Flex className="drawer-style" >
-            <Box><Link>Home</Link></Box>
-            <Box ><Link>All Products</Link></Box>
-            <Box><Link>Men's</Link></Box>
-            <Box><Link>Women's</Link></Box>
-            <Box><Link>Kids</Link></Box>
+            <Box><Link to="/">Home</Link></Box>
+            <Box ><Link to="/products">All Products</Link></Box>
+            <Box><Link to="/men">Men's</Link></Box>
+            <Box><Link to="/women">Women's</Link></Box>
+            <Box><Link to="/kids">Kids</Link></Box>
 
 
             </Flex>

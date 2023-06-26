@@ -14,21 +14,20 @@ const getData= (q)=> (dispatch)=> {
     })
 }
 
-const getfilterData= (page)=> (dispatch)=> {
+const getfilterData= (q)=> (dispatch)=> {
     dispatch({type: types.GET_DATA_REQUEST})
-
-   return axios.get(`https://v-mock-server-api.onrender.com/products?_page=${page}&_limit=6`).then((res)=> {
+     console.log(q)
+   return axios.get(`https://v-mock-server-api.onrender.com/products`,q).then((res)=> {
  
        const payload= res.data
+       console.log(payload)
        dispatch({type: types.GET_DATA_SUCCESS,payload})
    }).catch((err)=> {
        dispatch({type: types.GET_DATA_FAILURE})
    })
 }
 
-export const sortHighToLow= ()=> ({type: types.SORT_HIGH_TO_LOW})
 
-export const sortLowToHigh= ()=> ({type: types.SORT_LOW_TO_HIGH})
 
 
 

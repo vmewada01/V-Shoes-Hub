@@ -1,0 +1,133 @@
+import { StarIcon } from '@chakra-ui/icons'
+import { Box, Button, Flex, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getSingleData } from '../Redux/AppReducer/singleProduct/action'
+
+const SingleProduct = () => {
+ 
+    const {id} = useParams()
+   // console.log(id)
+    const dispatch = useDispatch()
+    const item = useSelector((store) => store.singleProduct.products);
+    console.log(item)
+
+
+  useEffect(()=> {
+
+    dispatch(getSingleData(id))
+
+  },[])
+
+ const picture=  item?.images
+ //console.log(picture[0].url)
+
+const [currentImg, setCurrentImg] = useState(picture[0])
+
+  return (
+    <Box w={{lg:"80%"}} m="auto" pt={"20px"} pb="20px" >
+        <Flex w={{ lg:"100%"}} direction={{base:"column", sm:"column", md:"column", lg:"row"}}  margin="auto">
+            <Box w={{md:"70%", lg:"50%"}} m="auto" >
+                <Box w={{base : "70%", sm:"60%", md:"60%",lg:"80%"}} h={{base:"200px", sm:"250", md:"300px", lg:"500px"}}  m="auto" boxSizing={"border-box"} position={"relative"} overflow={"hidden"}>
+                      <Image objectFit={"contain"} w={{base:"100%",lg:"100%"}} h={"100%"}
+                         transition={"all 0.5s"}
+                         _hover={{"transform":"scale(1.5)", transition: "all 0.6s"}}
+                         display={"block"}
+                         src={currentImg.url}
+                      />
+                </Box>
+                 
+                 <Box >
+                    <Flex w={"80%"} m={"auto"} gap="10px" pt={"15px"}>
+                    
+
+         {
+            item?.images?.map((ele)=> {
+
+                //console.log(ele)
+                return(
+
+             
+                <Box key={ele.id} border="1px solid #e1e1e1" w={"20%"} p="8px" m={"auto"} onClick={()=>setCurrentImg(ele)} >
+                <Image objectFit={"contain"} src={ele.url} w="100%" h={{base:"40px", md :"80px"}}/>
+               </Box>
+               )    
+
+            })
+         }
+
+                    </Flex>
+                 </Box>
+            </Box>                
+             <Box w={{base: "85%", sm: "80%", md:"60%", lg:"60%"}} textAlign={"left"} pl={{base:"0px", md:"10px", lg:"30px"}} m={"auto"} >
+                  <Text fontWeight={"550"} fontSize={"18px"} pb="12px">{item.title}</Text>
+                  <Text fontWeight={"550"} fontSize={"18px"} pb="12px">{item.brand}</Text>
+                  <Text fontWeight={"550"} fontSize={"18px"} color={"#8d8d8d"} pb="12px">{item.category}</Text>
+                  <Text fontWeight={"650"} fontSize={"18px"} pb="12px">₹ {item.price}</Text>
+                  <Box display='flex' mt='2' alignItems='center'pb="12px">
+                        {Array(5)
+                            .fill('')
+                            .map((_, i) => (
+                            <StarIcon
+                                key={i}
+                                color={i < item.rating ? '#ffa41c' : 'gray.300'}
+                            />
+                            ))}
+                  </Box> 
+                  <Flex direction={{base:"column",sm:"row", md:"row", lg: "row"}} gap="10px">
+                    <Button bg={"#ffcc33"} color={"black"} w={{sm:"40%"}} >Add To Cart</Button>
+                    <Button bg={"#8d8d8d "} color={"white"} w={{sm:"40%"}}>Add To Wishlist</Button>
+                  </Flex>
+                  <Box >
+                  <TableContainer  >
+                                <Table variant='simple' size={{base:"sm", sm:"sm", md:"md"}} >
+                                    <TableCaption>Product Specification</TableCaption>
+                                    <Thead >
+                                    <Tr>
+                                        <Th>feature</Th>
+                                        <Th>Info</Th>           
+                                    </Tr>
+                                    </Thead>
+                                    <Tbody >
+                                    <Tr>
+                                        <Td>Color</Td>
+                                        <Td>White</Td>
+                                        
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Outer material</Td>
+                                        <Td>Synthetic Leather</Td>
+                                        
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Sole Material</Td>
+                                        <Td>Rubber</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Closure</Td>
+                                        <Td>Lace -Ups</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Model name</Td>
+                                        <Td>{item.brand}</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Occasion</Td>
+                                        <Td>Sports</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Ideal for</Td>
+                                        <Td>{item.category}</Td>
+                                    </Tr>
+                                    </Tbody>
+                                </Table>
+                    </TableContainer>
+                  </Box>
+            </Box>
+        </Flex>
+    </Box>
+  )
+}
+
+export default SingleProduct

@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import { Box, Button, Image, Text } from '@chakra-ui/react'
-import "../pages/Homepage.css"
+import "./Homepage.css"
 
 
 const Homepage = () => {

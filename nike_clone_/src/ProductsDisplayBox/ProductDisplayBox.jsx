@@ -1,9 +1,11 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductDisplayBox = ({ item }) => {
   return (
     <Box>
+      <Link to={`/products/${item.id}`}>
       <Box className="transition" >
         <Image src={item.imageSrc} />
       </Box>
@@ -24,6 +26,7 @@ const ProductDisplayBox = ({ item }) => {
           ★{item.rating}
         </button>
       </Box>
+      </Link>
     </Box>
   );
 };

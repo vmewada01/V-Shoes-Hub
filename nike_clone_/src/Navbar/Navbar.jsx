@@ -38,17 +38,20 @@ const Navbar = () => {
         </Box>
 
         <Box className="navbar-middle">
-          <Box>
-            <Link>New & Featured</Link>
+        <Box>
+            <Link to="/">Home</Link>
           </Box>
           <Box>
-            <Link>Men</Link>
+            <Link to="/products">New & Featured</Link>
           </Box>
           <Box>
-            <Link>Women</Link>
+            <Link to="/men">Men</Link>
           </Box>
           <Box>
-            <Link>Kids</Link>
+            <Link to="/women">Women</Link>
+          </Box>
+          <Box>
+            <Link to="/kids">Kids</Link>
           </Box>
         </Box>
 

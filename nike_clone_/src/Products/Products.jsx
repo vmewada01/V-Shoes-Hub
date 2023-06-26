@@ -12,6 +12,7 @@ import {
   Heading,
   Input,
   Select,
+  Text,
   border,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -25,37 +26,64 @@ import {
   getfilterDataSortBy,
   sortHighToLow,
   sortLowToHigh,
-} from "../Redux/AppReducer/action";
-import ProductDisplayBox from "./ProductDisplayBox";
-import { useLocation, useSearchParams } from "react-router-dom";
+} from "../Redux/AppReducer/Products/action";
+
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import ProductDisplayBox from "../ProductsDisplayBox/ProductDisplayBox";
 
 const Products = () => {
   const [filter, setFilter] = useState(true);
 
   const dispatch = useDispatch();
   const data = useSelector((store) => store.AppReducer.products);
-  // console.log(data);
 
-  // const [page, setPage] = useState(1);
   const [order, setOrder] = useState("asc");
   const [searchParams, setSearchParams] = useSearchParams();
   const initcategoryParams = searchParams.getAll("category");
   const initialBrandParams = searchParams.getAll("brand");
   const [brand, setBrand] = useState(initialBrandParams || []);
   const [category, setCategory] = useState(initcategoryParams || []);
-  const initialPage = searchParams.get("page") 
-  const location  = useLocation()
-  const initialRatingParams = searchParams.getAll('rating')
-  const [ rating,  setRating ] = useState(initialRatingParams || []); 
-  const [ page, setPage ] = useState(initialPage || 1)
-  let pageNo = searchParams.get('page')
+  const initialPage = searchParams.get("page");
+  const location = useLocation();
+  const initialRatingParams = searchParams.getAll("rating");
+  const [rating, setRating] = useState(initialRatingParams || []);
+  const [page, setPage] = useState(initialPage || 1);
+  let pageNo = searchParams.get("page");
+  // const params= useParams()
+  // console.log(params)
+  //console.log(location.pathname)
 
+  useEffect(() => {
+    if (location.pathname == "/men") {
+      let q = {
+        params: {
+          category: "men",
+        },
+      };
+      dispatch(getfilterData(q));
+    } else if (location.pathname == "/women") {
+      let q = {
+        params: {
+          category: "women",
+        },
+      };
+      dispatch(getfilterData(q));
+    } else if (location.pathname == "/kids") {
+      let q = {
+        params: {
+          category: "kids",
+        },
+      };
+      dispatch(getfilterData(q));
+    }
+    else{
+      dispatch(getData())
+    }
+  }, [location.pathname]);
 
   const handleSortBy = (e) => {
     setOrder(e.target.value);
   };
-
-  
 
   const handleCategory = (e) => {
     let value = e.target.value;
@@ -71,112 +99,109 @@ const Products = () => {
     setCategory(newCategory);
   };
 
+  const handlebyBrand = (e) => {
+    let value = e.target.value;
 
-   const handlebyBrand=(e)=> {
-     let value= e.target.value;
-     
-     let newBrand =[...brand]
-     if(brand.includes(value)){
-      newBrand.splice(newBrand.indexOf(value),1);
-     }
-     else{
-      newBrand.push(value)
-     }
-    setBrand(newBrand)
-   //console.log(newBrand)
-   }
+    let newBrand = [...brand];
+    if (brand.includes(value)) {
+      newBrand.splice(newBrand.indexOf(value), 1);
+    } else {
+      newBrand.push(value);
+    }
+    setBrand(newBrand);
+    //console.log(newBrand)
+  };
 
-   const handleByRating = (e)=>{
-    let value = e.target.value 
-    //console.log(value) 
-   
-    let newRating = [...rating]
-    if(rating.includes(value))
-     {
-         newRating.splice(newRating.indexOf(value),1)
-     }
-     else{
-         newRating.push(value)
-     }
-    console.log(newRating)
-     setRating(newRating)
-             
- }
+  const handleByRating = (e) => {
+    let value = e.target.value;
+    //console.log(value)
 
+    let newRating = [...rating];
+    if (rating.includes(value)) {
+      newRating.splice(newRating.indexOf(value), 1);
+    } else {
+      newRating.push(value);
+    }
+    // console.log(newRating);
+    setRating(newRating);
+  };
 
-
-
-   useEffect(() => {
-   let params={}
-    if(category || brand || page || rating ){
-      category && (params.category=category)
-       brand && (params.brand=brand)
-      rating && (params.rating=rating)
+  useEffect(() => {
+    let params = {};
+    if (category || brand || page || rating) {
+      category && (params.category = category);
+      brand && (params.brand = brand);
+      rating && (params.rating = rating);
       // console.log(category)
       // console.log(params.category)
     }
-     console.log(params)
-   // console.log(pageNo)
-     setSearchParams(params)
+    // console.log(params);
+    // console.log(pageNo)
+    setSearchParams(params);
 
     //  console.log(category)
     //  console.log(searchParams)
-  
+
     //dispatch(getData(category));
-  }, [setSearchParams,category,brand,rating]);
+  }, [setSearchParams, category, brand, rating]);
 
   // useEffect(()=> {
   //   dispatch(getfilterData(page))
 
   // },[page,dispatch,category])
-  useEffect(()=>{
-     console.log(location.search)
-     console.log(brand)
-    
-    if(location || data.length === 0)
-    {
-      
+  useEffect(() => {
+    // console.log(location.search);
+    // console.log(brand);
+
+    if (location || data.length === 0) {
       let q = {
-        params:{
-          category: searchParams.getAll('category'),
-           brand: searchParams.getAll('brand'),
-           rating_gte: searchParams.getAll('rating'),
+        params: {
+          category: searchParams.getAll("category"),
+          brand: searchParams.getAll("brand"),
+          rating_gte: searchParams.getAll("rating"),
           // _sort : sort && "price",
           // _order: sort,
           _page: page,
-          _limit:9
-        }
-      }
+          _limit: 9,
+        },
+      };
       //console.log(searchParams.getAll("brand"))
-      dispatch(getData(q))
+      dispatch(getData(q));
     }
-  },[location.search ,page, order])
-
+  }, [location.search, page, order]);
 
   if (order == "asc") {
     // console.log(order)
     //console.log(order)
-   data.sort((a,b)=> a.rating-b.rating)
+    data.sort((a, b) => a.rating - b.rating);
   } else if (order == "dsc") {
-    data.sort((a,b)=> b.rating-a.rating)
+    data.sort((a, b) => b.rating - a.rating);
+  } else if (order == "LTH") {
+    console.log(order);
+    data.sort((a, b) => a.price - b.price);
+  } else if (order == "HTL") {
+    data.sort((a, b) => b.price - a.price);
   }
-  else if(order=='LTH'){
-    console.log(order)
-    data.sort((a,b)=> a.price-b.price )
-  }
-  else if(order=='HTL'){
-    data.sort((a,b)=> b.price-a.price)
-  }
-
 
   return (
     <Box width={"95%"} margin={"auto"}>
       {/* filter div */}
       <Box>
         <Flex className="flex-top">
-          <Box>New & Featured</Box>
-          <Flex gap={"0.5rem"}>
-            <Button variant={"ghost"} onClick={() => setFilter(!filter)}>
+          <Box>
+            <Text as='b'>
+            {location.pathname == "/men"
+              ? "MEN"
+              : location.pathname == "/women"
+              ? "WOMEN"
+              : location.pathname == "/kids"
+              ? "KIDS"
+           
+              : "ALL PRODUCTS"}
+              </Text>
+          </Box>
+          <Flex gap={"0.5rem"} className="flex-2">
+            <Button color={'white'} variant={"ghost"} onClick={() => setFilter(!filter)}>
               <FilterAltIcon />
               {filter ? "Hide Filter" : "Show Filter"}
             </Button>
@@ -273,7 +298,7 @@ const Products = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                <Box>
+                  <Box>
                     <Checkbox
                       size="lg"
                       value="Nike"
@@ -287,14 +312,11 @@ const Products = () => {
                       onChange={handlebyBrand}
                       defaultChecked={category.includes("Jordan")}
                       value="Jordan"
-              
                     />
                     <label>Jordan</label>
                   </Box>
-                 
                 </AccordionPanel>
               </AccordionItem>
-              
 
               <AccordionItem>
                 <h2>
@@ -306,7 +328,7 @@ const Products = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                <Box>
+                  <Box>
                     <Checkbox
                       size="lg"
                       value="3"
@@ -320,11 +342,9 @@ const Products = () => {
                       onChange={handleByRating}
                       defaultChecked={rating.includes("4Above")}
                       value="4"
-                      
                     />
                     <label>4 ★ & above</label>
                   </Box>
-                 
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
