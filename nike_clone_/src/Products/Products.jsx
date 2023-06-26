@@ -36,7 +36,7 @@ const Products = () => {
 
   const dispatch = useDispatch();
   const data = useSelector((store) => store.AppReducer.products);
-
+  const loading = useSelector((store)=> store.AppReducer.products.isloading )
   const [order, setOrder] = useState("asc");
   const [searchParams, setSearchParams] = useSearchParams();
   const initcategoryParams = searchParams.getAll("category");
@@ -241,7 +241,7 @@ const Products = () => {
           </Flex>
         </Flex>
       </Box>
-
+     {loading && <Heading> Loading.....</Heading>}
       {/* sidebar && main content div */}
       <Flex gap="0.5rem" className="media-query">
         {filter && (

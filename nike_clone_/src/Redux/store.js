@@ -9,10 +9,11 @@ import {
  import {reducer as AppReducer} from "./AppReducer/Products/reducer"
  import {reducer as AuthReducer} from "./AuthReducer/reducer"
  import {reducer as singleProduct} from "./AppReducer/singleProduct/reducer"
-  
+import { reducer as cart_reducer} from "./AppReducer/Cart/reducer"
+
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   
-  const rootReducer = combineReducers({ AppReducer, AuthReducer, singleProduct });
+  const rootReducer = combineReducers({ AppReducer, AuthReducer, singleProduct , cart_reducer });
   
   const store = legacy_createStore(
     rootReducer,

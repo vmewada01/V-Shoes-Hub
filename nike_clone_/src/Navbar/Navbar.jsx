@@ -42,7 +42,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </Box>
           <Box>
-            <Link to="/products">New & Featured</Link>
+            <Link to="/products">All Products</Link>
           </Box>
           <Box>
             <Link to="/men">Men</Link>
@@ -60,7 +60,9 @@ const Navbar = () => {
             <FavoriteBorderIcon style={{ fontSize: "40px" }} />{" "}
           </Box>
           <Box>
+            <Link to="/cart">
             <ShoppingCartIcon style={{ fontSize: "40px" }} />
+            </Link>
           </Box>
           <Box className="navbar-menu-list" onClick={onOpen} >
             {" "}

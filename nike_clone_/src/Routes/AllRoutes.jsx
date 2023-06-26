@@ -6,6 +6,7 @@ import Products from '../Products/Products'
 import Homepage from '../Homepage/Homepage'
 
 import SingleProduct from '../SingleProduct/SingleProductItem'
+import Cart from '../cart/Cart'
 
 const AllRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AllRoutes = () => {
       <Route path="/women" element={<Products/>} />
       <Route path="/kids" element={<Products/>} />
       <Route path="/products/:id" element={<SingleProduct/>} />
+      <Route path="/cart" element={<Cart/>} />
     </Routes>
     <Footer />
     </>
