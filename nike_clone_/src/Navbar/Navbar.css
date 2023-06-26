@@ -70,5 +70,19 @@
     text-decoration: underline;
     transform: scale(1.1);
   }
+  .cart-logo-div{
+    position: relative;
+  }
+  .cart-logo{
+    position: absolute;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    margin: auto;
+    top: -30%;
+    left: 50%;
+  }
 
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getSingleData } from '../Redux/AppReducer/singleProduct/action'
 import { addToCart } from '../Redux/AppReducer/Cart/action'
+import { addToWishList } from '../Redux/AppReducer/wishlist/action'
 
 const SingleProduct = () => {
  
@@ -28,6 +29,10 @@ const SingleProduct = () => {
       alert("item added to cart")
  }
  
+ const wishlistfunction=(item)=> {
+    dispatch(addToWishList(item))
+    alert("item added to Wishlist")
+ }
 
 
 //  const picture=  item?.images
@@ -91,7 +96,7 @@ const SingleProduct = () => {
              </Box> 
              <Flex direction={{base:"column",sm:"row", md:"row", lg: "row"}} gap="10px">
                <Button bg={"#ffcc33"} color={"black"} w={{sm:"40%"}}  onClick={()=> CartDetails(item)} >Add To Cart</Button>
-               <Button bg={"#8d8d8d "} color={"white"} w={{sm:"40%"}}>Add To Wishlist</Button>
+               <Button bg={"#8d8d8d "} color={"white"} w={{sm:"40%"}}  onClick={()=> wishlistfunction(item)}     >Add To Wishlist</Button>
              </Flex>
              <Box >
              <TableContainer  >

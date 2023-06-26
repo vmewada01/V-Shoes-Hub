@@ -10,10 +10,11 @@ import {
  import {reducer as AuthReducer} from "./AuthReducer/reducer"
  import {reducer as singleProduct} from "./AppReducer/singleProduct/reducer"
 import { reducer as cart_reducer} from "./AppReducer/Cart/reducer"
+import {reducer as wishlist} from "./AppReducer/wishlist/reducer"
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   
-  const rootReducer = combineReducers({ AppReducer, AuthReducer, singleProduct , cart_reducer });
+  const rootReducer = combineReducers({ AppReducer, AuthReducer, singleProduct , cart_reducer, wishlist });
   
   const store = legacy_createStore(
     rootReducer,

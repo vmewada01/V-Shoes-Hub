@@ -17,10 +17,16 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerExample from "./DrawerExample";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
+   const cart= useSelector((store)=> store.cart_reducer.cart)
+   //console.log(cart.length)
+   const cartLength = cart.reduce((acc,curr)=> acc+ (curr.qty),0)
+   const data = useSelector((store)=> store.wishlist.wishlist)
+
+   return (
     <Box>
       <Box className="navbar">
         <Flex className="top-navbar-signup">
@@ -56,10 +62,15 @@ const Navbar = () => {
         </Box>
 
         <Box className="navbar-icon-style">
-          <Box>
+          <Box className="cart-logo-div">
+            <Link to='/wishlist'>
+          <Box className="cart-logo">{data.length}</Box>
+
             <FavoriteBorderIcon style={{ fontSize: "40px" }} />{" "}
+            </Link>
           </Box>
-          <Box>
+          <Box className="cart-logo-div">
+            <Box className="cart-logo">{cartLength}</Box>
             <Link to="/cart">
             <ShoppingCartIcon style={{ fontSize: "40px" }} />
             </Link>
