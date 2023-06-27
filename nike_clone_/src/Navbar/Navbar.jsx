@@ -24,7 +24,7 @@ const Navbar = () => {
    const cart= useSelector((store)=> store.cart_reducer.cart)
    //console.log(cart.length)
    const cartLength = cart.reduce((acc,curr)=> acc+ (curr.qty),0)
-   const data = useSelector((store)=> store.wishlist.wishlist)
+   const data = useSelector((store)=> store.wish_list.wishlist)
 
    return (
     <Box>

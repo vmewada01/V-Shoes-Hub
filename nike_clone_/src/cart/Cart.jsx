@@ -1,8 +1,9 @@
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { decreaseQuantity, increaseQuantity, removeQuantity } from '../Redux/AppReducer/Cart/action'
+import Checkout from '../checkout/Checkout'
 
 const Cart = () => {
   const navigate= useNavigate()
@@ -100,6 +101,7 @@ const Cart = () => {
                    </Flex>
               </Box>
               <Box m={{base: "auto", sm:"auto", md:"auto", lg:"px"}}>
+                        <Link to="/checkout">
                          <Button 
                           
                             w={"100%"} 
@@ -111,6 +113,8 @@ const Cart = () => {
                             >
                                 Proceed to Checkout
                             </Button>
+                            </Link>
+                  
               </Box>
           </Box>
           

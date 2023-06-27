@@ -12,6 +12,7 @@ import {
   Heading,
   Input,
   Select,
+  Spinner,
   Text,
   border,
 } from "@chakra-ui/react";
@@ -36,7 +37,7 @@ const Products = () => {
 
   const dispatch = useDispatch();
   const data = useSelector((store) => store.AppReducer.products);
-  const loading = useSelector((store)=> store.AppReducer.products.isloading )
+  const loading = useSelector((store)=> store.AppReducer.isLoading )
   const [order, setOrder] = useState("asc");
   const [searchParams, setSearchParams] = useSearchParams();
   const initcategoryParams = searchParams.getAll("category");
@@ -52,6 +53,7 @@ const Products = () => {
   // const params= useParams()
   // console.log(params)
   //console.log(location.pathname)
+ // console.log(loading)
 
   useEffect(() => {
     if (location.pathname == "/men") {
@@ -241,7 +243,15 @@ const Products = () => {
           </Flex>
         </Flex>
       </Box>
-     {loading && <Heading> Loading.....</Heading>}
+      <Box display="flex" justifyContent='center' alignContent={'center'} margin='auto'>
+        {loading && <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='white'
+            color='blue.500'
+            size='xl'
+            />}</Box>
+     
       {/* sidebar && main content div */}
       <Flex gap="0.5rem" className="media-query">
         {filter && (
