@@ -25,7 +25,9 @@ const reducer = (state = initialState, action) => {
             ...state,
             isloading: false,
             isAuth: true,
-            token: payload
+            token: payload,
+            isError: false
+
         }
     }
     case types.GET_LOGIN_FAILURE: {

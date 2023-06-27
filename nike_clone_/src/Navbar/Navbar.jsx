@@ -30,7 +30,7 @@ const Navbar = () => {
     <Box>
       <Box className="navbar">
         <Flex className="top-navbar-signup">
-          <Button variant="ghost">Sign up</Button>
+        <Link to='/signup'><Button variant="ghost">Sign up</Button></Link>
           <NightlightRoundIcon />
         </Flex>
       </Box>
