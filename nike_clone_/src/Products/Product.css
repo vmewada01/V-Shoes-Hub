@@ -43,12 +43,18 @@
       
         height: 150px;
        }
+
+       .text-class{
+        font-size: 30px;
+       }
+
+
+
        .flex-2{
         display: flex;
-        flex-direction: column;
-        background-color: black;
-        color: white;
-      
+        justify-content: space-between;
+       
+         width: 100%;
         border-radius: 5px;
        }
        .media-query{
@@ -81,20 +87,25 @@
   @media only screen and (max-width: 400px) {
    .flex-top{
     display: flex;
-    flex-direction: column;
-   
-    height: 150px;
+  
+     height: 150px;
    }
+
+   .text-class{
+    font-size: 30px;
+   }
+
    .flex-2{
     display: flex;
-    flex-direction: column;
-    background-color: black;
-    color: white;
+    justify-content: space-evenly;
+  
     border-radius: 5px;
+   
    }
    .media-query{
      display: flex;
-     flex-direction: column;
+    justify-content: space-between;
+
    }
    .sidebar{
     width: 100%;

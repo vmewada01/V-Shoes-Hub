@@ -114,12 +114,12 @@ import {
                  onClick={handleSignup}
                   loadingText="Submitting"
                   size="lg"
-                  bg={'black'}
+                  bg={'rgb(84,98,111)'}
                   color={'white'}
                   _hover={{
-                    bg: 'white',
-                    color: "black",
-                    border: '1px solid black'
+                    bg: 'black',
+                    color: "white",
+                    
                   }}>
                   Sign up
                 </Button>
@@ -134,7 +134,7 @@ import {
         </Stack>
         <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
         closeOnClick

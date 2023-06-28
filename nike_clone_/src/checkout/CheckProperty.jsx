@@ -1,3 +1,7 @@
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const checkFormEmpty = (form) => {
     const {
       firstName,
@@ -116,3 +120,16 @@ export const checkFormEmpty = (form) => {
     }
     return { status: true };
   };
+
+  <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />

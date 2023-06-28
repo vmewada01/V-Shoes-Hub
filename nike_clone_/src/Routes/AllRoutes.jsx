@@ -11,6 +11,7 @@ import WishList from '../wishList/WishList'
 import Checkout from '../checkout/Checkout'
 import SignupCard from '../Signup/SignupCard'
 import Login from '../Login/Login'
+import PrivateRoute from '../PrivateRoutes/PrivateRoute'
 
 const AllRoutes = () => {
   return (
@@ -23,9 +24,21 @@ const AllRoutes = () => {
       <Route path="/women" element={<Products/>} />
       <Route path="/kids" element={<Products/>} />
       <Route path="/products/:id" element={<SingleProduct/>} />
-      <Route path="/cart" element={<Cart/>} />
-     <Route path="/wishlist" element={<WishList />} />
-      <Route path="/checkout" element={<Checkout/>} />
+      <Route path="/cart" element={
+        <PrivateRoute>
+      <Cart/>
+      </PrivateRoute>
+      } />
+     <Route path="/wishlist" element={
+     <PrivateRoute>
+     <WishList />
+     </PrivateRoute>
+     } />
+      <Route path="/checkout" element={
+      <PrivateRoute>
+      <Checkout/>
+      </PrivateRoute>
+      } />
       <Route path="/signup" element={<SignupCard/>} />
       <Route path="/login" element={<Login/>} />
     </Routes>

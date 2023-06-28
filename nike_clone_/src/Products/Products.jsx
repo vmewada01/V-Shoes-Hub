@@ -37,7 +37,7 @@ const Products = () => {
 
   const dispatch = useDispatch();
   const data = useSelector((store) => store.AppReducer.products);
-  const loading = useSelector((store)=> store.AppReducer.isLoading )
+  const loading = useSelector((store) => store.AppReducer.isLoading);
   const [order, setOrder] = useState("asc");
   const [searchParams, setSearchParams] = useSearchParams();
   const initcategoryParams = searchParams.getAll("category");
@@ -53,7 +53,7 @@ const Products = () => {
   // const params= useParams()
   // console.log(params)
   //console.log(location.pathname)
- // console.log(loading)
+  // console.log(loading)
 
   useEffect(() => {
     if (location.pathname == "/men") {
@@ -77,9 +77,8 @@ const Products = () => {
         },
       };
       dispatch(getfilterData(q));
-    }
-    else{
-      dispatch(getData())
+    } else {
+      dispatch(getData());
     }
   }, [location.pathname]);
 
@@ -191,67 +190,98 @@ const Products = () => {
       <Box>
         <Flex className="flex-top">
           <Box>
-            <Text as='b'>
-            {location.pathname == "/men"
-              ? "MEN"
-              : location.pathname == "/women"
-              ? "WOMEN"
-              : location.pathname == "/kids"
-              ? "KIDS"
-           
-              : "ALL PRODUCTS"}
-              </Text>
+            <Text className="text-class" as="b">
+              {location.pathname == "/men"
+                ? "MEN"
+                : location.pathname == "/women"
+                ? "WOMEN"
+                : location.pathname == "/kids"
+                ? "KIDS"
+                : "ALL PRODUCTS"}
+            </Text>
           </Box>
-          <Flex gap={"0.5rem"} className="flex-2">
-            <Button color={'white'} variant={"ghost"} onClick={() => setFilter(!filter)}>
+          <Flex
+            justifyContent={"space-between"}
+            gap={"0.5rem"}
+            className="flex-2"
+          >
+            <Button
+              bg="black"
+              color={"white"}
+              _hover={{
+                bg: "rgb(84,98,111)",
+                color: "white",
+              }}
+              onClick={() => setFilter(!filter)}
+            >
               <FilterAltIcon />
               {filter ? "Hide Filter" : "Show Filter"}
             </Button>
+            <Button
+              bg="black"
+              color={"white"}
+              _hover={{
+                bg: "rgb(84,98,111)",
+                color: "white",
+               
+              }}
 
-            <Select
-              border="none"
-              size="md"
-              onChange={handleSortBy}
-              fontWeight="semibold"
-              placeholder="SORT BY"
+              width={'130px'}
             >
-              <option
-                style={{ backgroundColor: "black", color: "white" }}
-                value="asc"
+              <Select
+                border="none"
+                size="md"
+                onChange={handleSortBy}
+                fontWeight="semibold"
+                placeholder="SORT"
+                _hover={{cursor:"pointer"}}
               >
-                LOW TO HIGH RATING★
-              </option>
-              <option
-                style={{ backgroundColor: "black", color: "white" }}
-                value="dsc"
-              >
-                HIGH TO LOW RATING★
-              </option>
-              <option
-                style={{ backgroundColor: "black", color: "white" }}
-                value="LTH"
-              >
-                LOW TO HIGH PRICE
-              </option>
-              <option
-                style={{ backgroundColor: "black", color: "white" }}
-                value="HTL"
-              >
-                HIGH TO LOW PRICE
-              </option>
-            </Select>
+                <option
+                  style={{ backgroundColor: "black", color: "white" }}
+                  value="asc"
+                >
+                  LOW TO HIGH RATING★
+                </option>
+                <option
+                  style={{ backgroundColor: "black", color: "white" }}
+                  value="dsc"
+                >
+                  HIGH TO LOW RATING★
+                </option>
+                <option
+                  style={{ backgroundColor: "black", color: "white" }}
+                  value="LTH"
+                >
+                  LOW TO HIGH PRICE
+                </option>
+                <option
+                  style={{ backgroundColor: "black", color: "white" }}
+                  value="HTL"
+                >
+                  HIGH TO LOW PRICE
+                </option>
+              </Select>
+            </Button>
           </Flex>
         </Flex>
       </Box>
-      <Box display="flex" justifyContent='center' alignContent={'center'} margin='auto'>
-        {loading && <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='white'
-            color='blue.500'
-            size='xl'
-            />}</Box>
-     
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignContent={"center"}
+        margin="auto"
+      >
+        {loading && (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="white"
+            color="blue.500"
+            size="xl"
+          />
+        )}
+      </Box>
+
       {/* sidebar && main content div */}
       <Flex gap="0.5rem" className="media-query">
         {filter && (
@@ -382,7 +412,7 @@ const Products = () => {
         >
           Previous
         </button>
-        <Button>{page}</Button>
+        <Button color={'white'} bg='rgb(84,98,111)'>{page}</Button>
         <button
           style={{
             backgroundColor: "black",

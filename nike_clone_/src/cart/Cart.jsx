@@ -29,7 +29,7 @@ const Cart = () => {
       }
 
       const handleRedirectToAllProducts=()=> {
-        navigate("/")
+        navigate("/products")
       }
 
   return (
@@ -59,15 +59,15 @@ const Cart = () => {
                                   
                                   <Flex alignItems={"center"} gap={"5px"}>
                                       <Text fontWeight={"480"} fontSize={"13.5px"}>Quantity:</Text>
-                                      <Button bg='black' color='white'  size={"xs"} fontWeight={"700"} fontSize={"13.5px"} isDisabled={elem.qty === 1} onClick={()=>handelDecrease(elem.id,elem.qty)}>-</Button>
+                                      <Button bg='rgb(84,98,111)' color='white'  size={"xs"} fontWeight={"700"} _hover={{bg:"black",color:"white"}} fontSize={"13.5px"} isDisabled={elem.qty === 1} onClick={()=>handelDecrease(elem.id,elem.qty)}>-</Button>
                                          <Text fontWeight={"480"} fontSize={"13.5px"} pl={"5px"} pr={"5px"}>{elem.qty}</Text>
-                                      <Button bg='black' color='white' size={"xs"} fontWeight={"700"}  fontSize={"13.5px"} onClick={()=>handleIncrease(elem.id,elem.qty)}>+</Button>
+                                      <Button bg='rgb(84,98,111)' color='white' _hover={{bg:"black",color:"white"}} size={"xs"} fontWeight={"700"}  fontSize={"13.5px"} onClick={()=>handleIncrease(elem.id,elem.qty)}>+</Button>
                                   </Flex>
                               </Box>
                           </Flex>
                           <Flex mt={"5px"} alignItems={"center"} gap={"2px"} border={"1px solid #f1f3f6"}>
                                 <Box w={"50%"} >
-                                    <Button fontSize={"12px"} variant={"unstyled"} w={"100%"} onClick={()=>handleRemoveFromCart(elem.id)}>Remove</Button>
+                                    <Button bg={"rgb(84,98,111)"} _hover={{bg:"black",color:"white"}} fontSize={"12px"} variant={"unstyled"} w={"100%"} onClick={()=>handleRemoveFromCart(elem.id)}>Remove</Button>
                                 </Box>
                                 <Box w={"50%"}>
                                     <Button fontSize={"12px"} variant={"unstyled"} w={"100%"}>Add to Wishlist</Button>
@@ -105,10 +105,10 @@ const Cart = () => {
                          <Button 
                           
                             w={"100%"} 
-                            bg={"black"}
+                            bg={"rgb(84,98,111)"}
                             color={"white"}
                             borderRadius={"0"}
-                            _hover={{bg:"green.500", color:"white"}}
+                            _hover={{bg:"black", color:"white"}}
                            
                             >
                                 Proceed to Checkout

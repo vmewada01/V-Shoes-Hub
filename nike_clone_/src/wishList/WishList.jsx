@@ -41,8 +41,8 @@ const WishList = () => {
   return (
     <Box className="main-box">
       <Box padding={"1rem"}>
-        <Heading> ❤ WISHLIST ITEMS</Heading>
-        <Heading>{data.length} ITEMS</Heading>
+        <Heading as='h1' size={'2xl'} > ❤ WISHLIST CART</Heading>
+        <Heading as='h2' size={'2xl'}>{data.length} ITEMS</Heading>
         <Text>
           List of your favourite items. You can BUY them by just clicking on
           ITEM.

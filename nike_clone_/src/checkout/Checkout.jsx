@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { checkCharacter, checkEmail, checkFormEmpty, checkMobile, checkPinCode, setToast } from "./CheckProperty";
@@ -37,10 +37,12 @@ const initialState = {
 const Checkout = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const data = useSelector((store) => store.cart_reducer.cart);
-  //console.log(data)
+
+  
   const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
-
+  const auth = useSelector((store)=> store.AuthReducer.isAuth)
+  console.log(auth)
   const Total = data.reduce((acc, curr) => acc + curr.price * curr.qty, 0);
   const cartLength = data.reduce((acc, curr) => acc + curr.qty, 0);
   //  console.log(Total)
@@ -49,7 +51,9 @@ const Checkout = () => {
   const handleChange=({target: {name, value}})=> {
     setForm({...form, [name]: value});
   }
-  // console.log(form) 
+ 
+
+
   const handleFormValidation = (form) => {
     const isEmpty = checkFormEmpty(form);
     if (!isEmpty.status) {
@@ -85,8 +89,13 @@ const Checkout = () => {
  const handleSubmit=(e)=> {
         e.preventDefault();
         
-  
-            toast("Payment under process");
+   if(auth){
+   
+    toast("Please complete payment process on this link:-https://pages.razorpay.com/pl_M7Jg6SwzPlhFZX/view ")
+
+   }
+            
+
         
  }
 
@@ -150,14 +159,14 @@ const Checkout = () => {
               mt="2rem"
               width={["95%", "90%", "80%", "80%"]}
               my={"4"}
-              bg={isLargerThan ? "black" : "grey"}
-              color="whitesmoke"
+              bg={"rgb(84,98,111)"}
+              color="white"
               p="1.5rem 2rem"
               border={"3px solid beige"}
               _hover={{
-                background: "none",
-                color: "teal",
-                border: "1px solid black",
+                background: "black",
+                color: "white"
+                
               }}
               type="submit"
             >
@@ -167,16 +176,20 @@ const Checkout = () => {
         </Box>
     {/* --------------Flex upper-----box-------------  */}
 
-        <Box  width={["95%", "90%", "40%", "40%"]} m="auto" min-h="100vh">
+        <Box  width={["100%", "95%", "40%", "40%"]} m="auto" min-h="100vh">
           <Stack>
             <Button
               border={"3px solid beige"}
-              bg={"black"}
+              bg={"rgb(84,98,111)"}
               color={"white"}
               fontWeight={"bold"}
               colorScheme={"none"}
               p="1.5rem"
-              _hover={{ bg: "none", color: "teal" }}
+              _hover={{
+                bg: 'black',
+                color: "white",
+                
+              }}
               onClick={backToCart}
             >
               Back To Cart
@@ -188,20 +201,20 @@ const Checkout = () => {
               ORDER SUMMARY
             </Heading>
             <Flex lineHeight={"10"}>
-              <Box align={"left"} mx={"2"} my={"4"}>
+              <Box align={"left"} mx={"1"} my={"4"}>
                 <Text>ORIGINAL PRICE</Text>
                 <Text> ITEMS</Text>
                 <Text>QUANTITY</Text>
                 <Text>DISCOUNT</Text>
                 <Text>DELIVERY</Text>
                 <Text>TOTAL</Text>
-                <Badge colorScheme="red">( inclusive to all taxes )</Badge>
+                <Badge fontSize={'0.65rem'} colorScheme="red">( inclusive to all taxes )</Badge>
               </Box>
               <Box mx={"2"} my={"4"}>
                 <Text as="s" color="grey">
-                  ₹ {Total} .00
+                  ₹ {Total}.00
                 </Text>
-                <Text>₹ {Total} .00</Text>
+                <Text>₹ {Total}.00</Text>
                 <Text>{cartLength}</Text>
                 <Text>₹ 00.00</Text>
                 <Text>FREE</Text>
@@ -209,7 +222,7 @@ const Checkout = () => {
               </Box>
             </Flex>
           </Stack>
-          <Stack my={"2"}>coupon</Stack>
+          <Stack  my={"2"}>coupon</Stack>
         </Box>
 
 
@@ -218,7 +231,7 @@ const Checkout = () => {
       </Flex>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
         closeOnClick

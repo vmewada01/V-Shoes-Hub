@@ -95,11 +95,11 @@ const SingleProduct = () => {
 
             <Box>
               <Flex w={"80%"} m={"auto"} gap="10px" pt={"15px"}>
-                {item?.images?.map((ele) => {
-                  //console.log(ele)
+                {item?.images?.map((ele,ind) => {
+                //  console.log(item.rating)
                   return (
                     <Box
-                      key={ele.id}
+                      key={ind}
                       border="1px solid #e1e1e1"
                       w={"20%"}
                       p="8px"
@@ -143,10 +143,12 @@ const SingleProduct = () => {
             <Box display="flex" mt="2" alignItems="center" pb="12px">
               {Array(5)
                 .fill("")
-                .map((_, i) => (
+                .map((_, i) =>
+                 
+                (
                   <StarIcon
                     key={i}
-                    color={i < item.rating ? "#ffa41c" : "gray.300"}
+                    color={i < +(item.rating) ? "#ffa41c" : "gray.300"}
                   />
                 ))}
             </Box>
@@ -155,17 +157,27 @@ const SingleProduct = () => {
               gap="10px"
             >
               <Button
-                bg={"#ffcc33"}
-                color={"black"}
+                bg={"rgb(84,98,111)"}
+                color={"white"}
                 w={{ sm: "40%" }}
+                _hover={{
+                  bg: 'black',
+                  color: "white",
+                  
+                }}
                 onClick={() => CartDetails(item)}
               >
                 Add To Cart
               </Button>
               <Button
-                bg={"#8d8d8d "}
+                bg={"rgb(84,98,111) "}
                 color={"white"}
                 w={{ sm: "40%" }}
+                _hover={{
+                  bg: 'black',
+                  color: "white",
+                  
+                }}
                 onClick={() => wishlistfunction(item)}
               >
                 Add To Wishlist
@@ -223,7 +235,7 @@ const SingleProduct = () => {
       )}
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
         closeOnClick

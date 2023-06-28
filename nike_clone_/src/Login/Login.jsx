@@ -6,13 +6,14 @@ import {
     Input,
     Checkbox,
     Stack,
-    Link,
+   
     Button,
     Heading,
     Text,
     useColorModeValue,
     Spinner,
   } from '@chakra-ui/react';
+  import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLogin } from '../Redux/AuthReducer/action';
@@ -32,34 +33,36 @@ import "react-toastify/dist/ReactToastify.css";
     const auth = useSelector((store)=> store.AuthReducer.isAuth)
    // console.log(auth)
    const navigate= useNavigate()
+   const location = useLocation();
+   const pathRoute= location.state?.from?.pathname || "/";
+  //  console.log(pathRoute)
+  //  console.log(location)
 
  const handleLoginFunc=()=> {
+  if(email && password){
     const payload= {
-        email: email,
-        password: password
-    }
-    dispatch(getLogin(payload))
-    setEmail("")
-    setPassword("")
+      email: email,
+      password: password
+  }
+  dispatch(getLogin(payload))
+  setEmail("")
+  setPassword("")
+  
+  if(auth){
+    navigate(pathRoute,{replace: true});
+   }
+   else if(error){
+    toast("Something went Wrong ..!!")
+ }
+else if(!auth){
+    toast("Please Enter the Right Credentials.")
+}
 
-    if(!auth){
-        toast("Please Enter the Right Credentials.")
-    }
-  else  if(auth){
-        navigate("/products")
-       }
-       else if(error){
-        toast("Something went Wrong ..!!")
-     }
-    
+  }
+   
  }
 
- 
- 
-
-
-
-    return (
+     return (
       <Flex
         minH={'100vh'}
         align={'center'}
@@ -104,12 +107,12 @@ import "react-toastify/dist/ReactToastify.css";
                 </Stack>
                 <Button
                 onClick={handleLoginFunc}
-                  bg={'black'}
+                  bg={'rgb(84,98,111)'}
                   color={'white'}
                   _hover={{
-                    bg: 'white',
-                    color: "black",
-                    border: "1px solid black"
+                    bg: 'black',
+                    color: "white",
+                    
                   }}>
                   Sign in
                 </Button>
@@ -117,14 +120,14 @@ import "react-toastify/dist/ReactToastify.css";
             </Stack>
             <Stack pt={6}>
                 <Text align={'center'}>
-                Don't have an account ? <span style={{color: "blue"}}><Link to='/login'>Signup</Link></span>
+                Don't have an account ?<Link to="https://reqres.in/" target='blank'> <span style={{color: "blue"}}>Use Reqres Fake Api to login</span></Link>
                 </Text>
               </Stack>
           </Box>
         </Stack>
         <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
         closeOnClick
