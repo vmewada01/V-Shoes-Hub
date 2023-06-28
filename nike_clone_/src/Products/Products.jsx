@@ -184,6 +184,7 @@ const Products = () => {
     data.sort((a, b) => b.price - a.price);
   }
 
+
   return (
     <Box width={"95%"} margin={"auto"}>
       {/* filter div */}

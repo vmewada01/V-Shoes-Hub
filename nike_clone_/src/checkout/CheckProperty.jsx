@@ -1,6 +1,5 @@
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 export const checkFormEmpty = (form) => {
     const {
@@ -14,6 +13,7 @@ export const checkFormEmpty = (form) => {
       email,
       mobile,
     } = form;
+   // console.log(form)
     if (
       !firstName ||
       !lastName ||
@@ -95,41 +95,16 @@ export const checkFormEmpty = (form) => {
     }
     return { status: true };
   };
-  export const setToast = (
-    toast,
-    title,
-    status,
-    duration = 2000,
-    description
-  ) => {
-    toast({
-      title,
-      description,
-      status,
-      duration,
-      isClosable: true,
-      position: "top",
-    });
-  };
+  
+  
   export const checkCharacter = (str) => {
     if (str[0] !== str[0].toUpperCase()) {
       return {
         status: false,
-        message: `First latter should be Capital in "${str}"`,
+        message: `First letter should be Capital in "${str}"`,
       };
     }
     return { status: true };
   };
 
-  <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+ 

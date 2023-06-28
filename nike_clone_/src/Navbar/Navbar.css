@@ -85,11 +85,11 @@
     left: 50%;
   }
 
-/* .dark-theme{
-  background-color: black;
+.dark-theme{
+  background-color: rgb(26,32,44);
   color: white;
 }
 .light-theme{
   background-color: white;
   color: black;
-} */
+}

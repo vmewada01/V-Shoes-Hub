@@ -27,7 +27,7 @@ const Navbar = () => {
    //console.log(cart.length)
    const cartLength = cart.reduce((acc,curr)=> acc+ (curr.qty),0)
    const data = useSelector((store)=> store.wish_list.wishlist)
- 
+      let mode =document.body.className
    const [theme, setTheme] = useState("light-theme")
 
    const toggleTheme=()=> {
@@ -59,7 +59,7 @@ const Navbar = () => {
     <Box>
       <Box className="navbar">
         <Flex className="top-navbar-signup">
-        <Link to="/login"><Button variant="ghost">Sign In</Button></Link>
+        <Link to="/login"><Button bg='none' _hover={{bg:'rgb(84,98,111)', color:"white"}}>Sign In</Button></Link>
        <Box onClick={toggleTheme}>{theme==="light-theme" ?   <FaSun size={'20px'} /> : <FaMoon/>} </Box>
        
         
@@ -76,7 +76,7 @@ const Navbar = () => {
 
         <Box className="navbar-middle">
         <Box>
-            <NavLink style={({isActive})=> (isActive? activeStyle : Style)} key="Home" to="/">Home</NavLink>
+            <NavLink   style={({isActive})=> (isActive? activeStyle : Style)} key="Home" to="/">Home</NavLink>
           </Box>
           <Box>
             <NavLink style={({isActive})=> (isActive? activeStyle : Style)} key="All Products" to="/products">All Products</NavLink>

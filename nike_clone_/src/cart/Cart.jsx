@@ -33,20 +33,20 @@ const Cart = () => {
       }
 
   return (
-    <Box w={"100%"} bg={"#f1f3f6"} m={"auto"}>
+    <Box w={"100%"}  m={"auto"}>
 
     {
        cartLength > 0  ? 
     <Flex w={{base:"100%", sm:"100%", md:"90%", lg:"80%"}} m={"auto"} gap={"10px"} pt={"20px"} direction={{base:"column", sm:"column", md: "column", lg:"row"}}>
           <Box w={{base:"80%", sm:"80%", md:"80%", lg:"65%"}}  textAlign={"left"} pl={"10px"} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}}>
-              <Box bg={"white"} mb={"20px"} p="5px">
-                  <Text fontWeight={"600"} pl={"20px"}>Your Cart ({cartLength})</Text>
+              <Box  mb={"20px"} p="5px">
+                  <Text border={"1px solid #f1f3f6"} fontWeight={"600"} pl={"20px"}>Your Cart ({cartLength})</Text>
               </Box>
              
               <Box >
                     {  cartLength > 0 &&
                         cartitem.map((elem)=>(
-                        <Box key={elem.id} bg={"white"} mb={"8px"} border={"1px solid #f1f3f6"} p={"10px"}  >
+                        <Box key={elem.id}  mb={"8px"} border={"1px solid #f1f3f6"} p={"10px"}  >
                           <Flex direction={{base: "column", sm:"row"}} alignItems={"center"}> 
                               <Box w={"100px"} m={{base:"auto", sm:"px", md:"px"}} >
                                 <Image objectFit={"cover"}  src={elem.imageSrc} alt={"cartPic"}/>
@@ -78,11 +78,11 @@ const Cart = () => {
                     }
               </Box> 
           </Box>
-          <Box  w={{base:"80%", sm:"80%", md:"80%", lg:"35%"}} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}} textAlign={"left"} pl={"10px"}>
-              <Box bg={"white"} mb={"20px"} p="5px" textAlign={"left"} pl={"20px"}>
+          <Box  border={"1px solid #f1f3f6"}  w={{base:"80%", sm:"80%", md:"80%", lg:"35%"}} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}} textAlign={"left"} pl={"10px"}>
+              <Box  mb={"20px"} p="5px" textAlign={"left"} pl={"20px"}>
                   <Text fontWeight={"600"}>Order Summery</Text>
               </Box>
-              <Box bg={"white"}>
+              <Box >
                    <Flex justifyContent={"space-between"} pt={"20px"} mb={"40px"} pl={"20px"} pr={"20px"} alignItems={"center"}>
                          <Text fontSize={"14px"} fontWeight={"600"}>Price ({cartitem.length} Items.)</Text>
                          <Text fontSize={"14px"} fontWeight={"600"}>₹ {Total}</Text>
