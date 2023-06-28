@@ -13,12 +13,12 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { checkCharacter, checkEmail, checkFormEmpty, checkMobile, checkPinCode, setToast } from "./CheckProperty";
-
+import { displayRazorpay } from "../Razorpay/Razorpay";
 
 
 
@@ -47,7 +47,7 @@ const Checkout = () => {
   const cartLength = data.reduce((acc, curr) => acc + curr.qty, 0);
   //  console.log(Total)
   //  console.log(cartLength)
-
+ const dispatch = useDispatch()
   const handleChange=({target: {name, value}})=> {
     setForm({...form, [name]: value});
   }
@@ -90,8 +90,8 @@ const Checkout = () => {
         e.preventDefault();
         
    if(auth){
-   
-    toast("Please complete payment process on this link:-https://pages.razorpay.com/pl_M7Jg6SwzPlhFZX/view ")
+    displayRazorpay(Total,form,navigate,dispatch)
+    
 
    }
             
