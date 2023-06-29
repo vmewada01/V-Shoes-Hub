@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { decreaseQuantity, increaseQuantity, removeQuantity } from '../Redux/AppReducer/Cart/action'
 import Checkout from '../checkout/Checkout'
+import { addToWishList } from '../Redux/AppReducer/wishlist/action'
+import { toast } from 'react-toastify'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const navigate= useNavigate()
@@ -31,6 +35,16 @@ const Cart = () => {
       const handleRedirectToAllProducts=()=> {
         navigate("/products")
       }
+
+      const wishlistfunction = (item) => {
+        //console.log(item)
+        dispatch(addToWishList(item));
+       // alert("item added to Wishlist");
+       toast("Item Added to Wishlist")
+      };
+    
+
+
 
   return (
     <Box w={"100%"}  m={"auto"}>
@@ -67,10 +81,10 @@ const Cart = () => {
                           </Flex>
                           <Flex mt={"5px"} alignItems={"center"} gap={"2px"} border={"1px solid #f1f3f6"}>
                                 <Box w={"50%"} >
-                                    <Button bg={"rgb(84,98,111)"} _hover={{bg:"black",color:"white"}} fontSize={"12px"} variant={"unstyled"} w={"100%"} onClick={()=>handleRemoveFromCart(elem.id)}>Remove</Button>
+                                    <Button   fontSize={"12px"} variant={"unstyled"} w={"100%"} onClick={()=>handleRemoveFromCart(elem.id)}>Remove</Button>
                                 </Box>
                                 <Box w={"50%"}>
-                                    <Button border={"1px solid #f1f3f6"} fontSize={"12px"} variant={"unstyled"} w={"100%"}>Add to Wishlist</Button>
+                                    <Button onClick={()=>wishlistfunction(elem)} border={"1px solid #f1f3f6"} fontSize={"12px"} variant={"unstyled"} w={"100%"}>Add to Wishlist</Button>
                                 </Box>
                           </Flex>
                         </Box>
@@ -126,8 +140,21 @@ const Cart = () => {
                    </Button>
             </Box>
      }
+     <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
 </Box>
   )
+  
 }
 
 export default Cart

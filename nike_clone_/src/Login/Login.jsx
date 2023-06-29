@@ -13,7 +13,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLogin } from "../Redux/AuthReducer/action";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function Login() {
   const loading = useSelector((store) => store.AuthReducer.isloading);
   const error = useSelector((store) => store.AuthReducer.isError);
   const auth = useSelector((store) => store.AuthReducer.isAuth);
-   //console.log(auth)
+  //console.log(auth)
   const navigate = useNavigate();
   const location = useLocation();
   const pathRoute = location.state?.from?.pathname || "/";
@@ -40,43 +40,33 @@ export default function Login() {
     email: email,
     password: password,
   };
- //console.log(payload)
+  //console.log(payload)
   let validation = checkLoginForm(payload);
+
   const handleLoginFunc = () => {
-   
-  
     if (!validation.status) {
       toast(validation.message);
-    } 
-   // console.log(validation)
-    if(validation.status) {
-     // console.log(auth)
-      dispatch(getLogin(payload));
-   
-      if (auth) {
-        navigate(pathRoute, { replace: true });
-        setEmail("");
-        setPassword("");
-      } else if (!auth) {
-        toast("Please Enter the Right Credentials.");
-      } else if (error) {
-        toast("Something went Wrong ..!!");
-      }
+    } else if (validation.status) {
+      dispatch(getLogin(payload)).then(() => {
+        if (auth) {
+          navigate("/products", { replace: true });
+        } else if (error) {
+          toast("Something went wrong ..!!");
+        } else {
+          toast("Please enter the right Credentials ..!!");
+        }
+      });
+      // console.log(auth)
     }
   };
-  let mode =document.body.className
 
+  let mode = document.body.className;
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      
-    >
+    <Flex minH={"100vh"} align={"center"} justify={"center"}>
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack  align={"center"}>
-          <Heading   fontSize={"4xl"}>SIGN IN TO YOUR ACCOUNT</Heading>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>SIGN IN TO YOUR ACCOUNT</Heading>
         </Stack>
         <Box display={"flex"} justifyContent={"center"}>
           {loading && (
@@ -89,12 +79,7 @@ export default function Login() {
             />
           )}
         </Box>
-        <Box
-          rounded={"lg"}
-         
-          boxShadow={"lg"}
-          p={8}
-        >
+        <Box rounded={"lg"} boxShadow={"lg"} p={8}>
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>

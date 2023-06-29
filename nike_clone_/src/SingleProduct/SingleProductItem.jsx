@@ -34,7 +34,7 @@ const SingleProduct = () => {
   const [gaveAlert, setAlert] = useState(false);
   // console.log(item)
   const loading = useSelector((store)=> store.AppReducer.isLoading)
-  // console.log(loading)
+   //console.log(loading)
   useEffect(() => {
     dispatch(getSingleData(id));
   }, []);
@@ -46,6 +46,7 @@ const SingleProduct = () => {
   };
 
   const wishlistfunction = (item) => {
+    //console.log(item)
     dispatch(addToWishList(item));
    // alert("item added to Wishlist");
    toast("Item Added to Wishlist")
@@ -53,9 +54,11 @@ const SingleProduct = () => {
 
   //  const picture=  item?.images
   //  //console.log(picture[0].url)
+  let initial=item.imageSrc
 
-   const [currentImg, setCurrentImg] = useState(item.imageSrc)
- 
+   const [currentImg, setCurrentImg] = useState(initial)
+  // console.log(currentImg)
+  // console.log(item.imageSrc)
    const handleSetImage=(url)=>{
      setCurrentImg(url)
    }
@@ -95,7 +98,7 @@ const SingleProduct = () => {
                 transition={"all 0.5s"}
                 _hover={{ transform: "scale(1.5)", transition: "all 0.6s" }}
                 display={"block"}
-                src={currentImg}
+                src={currentImg || initial}
               />
             </Box>
 

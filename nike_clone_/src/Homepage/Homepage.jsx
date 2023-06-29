@@ -17,7 +17,7 @@ const Homepage = () => {
 
 
        <Box className="navbar-bottom-image">
-      <Image className='img'  src="https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/h_1903,c_limit/467ca0c5-304e-4431-adc1-a8d761c942cf/nike-just-do-it.jpg" alt="image" />
+      <Image className='sprite'  src="https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/h_1903,c_limit/467ca0c5-304e-4431-adc1-a8d761c942cf/nike-just-do-it.jpg" alt="image" />
      </Box>
       <Box className='homepage-content'>
         <Box><Text fontSize="20px">Summer Essentials</Text></Box>

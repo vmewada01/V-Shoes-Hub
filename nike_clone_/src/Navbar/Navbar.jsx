@@ -57,9 +57,9 @@ const Navbar = () => {
 
    return (
     <Box>
-      <Box className="navbar">
+      <Box className={theme==='dark-theme'? 'dark-navbar': 'navbar'}>
         <Flex className="top-navbar-signup">
-        <Link to="/login"><Button bg='none' _hover={{bg:'rgb(84,98,111)', color:"white"}}>Sign In</Button></Link>
+        <Link to="/login"><Button bg='none' color={theme==='dark-theme'? 'white': 'black'} _hover={{bg:'rgb(84,98,111)', color:"white"}}>Sign In</Button></Link>
        <Box onClick={toggleTheme}>{theme==="light-theme" ?   <FaSun size={'20px'} /> : <FaMoon/>} </Box>
        
         

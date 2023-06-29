@@ -20,10 +20,10 @@
   margin-bottom: 2rem;
   transition: all 1s ease-in-out;
 }
-.featured-image:hover{
+/* .featured-image:hover{
   transform: rotate(360deg);
  
-}
+} */
 .trending-image-1:hover{
   transform: scale(1.1);
 }
@@ -86,4 +86,5 @@
     left: 100%;
   }
 } */
+
 

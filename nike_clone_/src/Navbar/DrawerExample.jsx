@@ -1,10 +1,12 @@
-import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Image, Input, useDisclosure } from "@chakra-ui/react"
-import  { useRef } from "react"
+import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Image, Input, RadioGroup, useDisclosure } from "@chakra-ui/react"
+import  { useRef, useState } from "react"
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 
 function DrawerExample({isOpen,onClose}) {
+
+   const [placement, setPlacement]= useState('right')
  
     const btnRef = React.useRef()
     const Style = {
@@ -16,10 +18,10 @@ function DrawerExample({isOpen,onClose}) {
   
     return (
       <>
-       
+       <RadioGroup defaultValue={placement} onChange={setPlacement}></RadioGroup>
         <Drawer
           isOpen={isOpen}
-          placement='right'
+          placement={placement}
           onClose={onClose}
           finalFocusRef={btnRef}
    

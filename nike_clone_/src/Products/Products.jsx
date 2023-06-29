@@ -31,6 +31,7 @@ import {
 
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import ProductDisplayBox from "../ProductsDisplayBox/ProductDisplayBox";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Products = () => {
   const [filter, setFilter] = useState(true);
@@ -184,7 +185,6 @@ const Products = () => {
     data.sort((a, b) => b.price - a.price);
   }
 
-
   return (
     <Box width={"95%"} margin={"auto"}>
       {/* filter div */}
@@ -198,7 +198,7 @@ const Products = () => {
                 ? "WOMEN"
                 : location.pathname == "/kids"
                 ? "KIDS"
-                : "ALL PRODUCTS"}
+                : "PRODUCTS"}
             </Text>
           </Box>
           <Flex
@@ -215,8 +215,8 @@ const Products = () => {
               }}
               onClick={() => setFilter(!filter)}
             >
-              <FilterAltIcon />
-              {filter ? "Hide Filter" : "Show Filter"}
+              
+              {filter ? (<FilterAltIcon />) : (<VisibilityOffIcon/>)} Filter
             </Button>
             <Button
               bg="black"
@@ -224,42 +224,40 @@ const Products = () => {
               _hover={{
                 bg: "rgb(84,98,111)",
                 color: "white",
-               
               }}
-
-              width={'130px'}
+             
             >
               <Select
                 border="none"
-                size="md"
+                size="xl"
                 onChange={handleSortBy}
                 fontWeight="semibold"
-                placeholder="SORT"
-                _hover={{cursor:"pointer"}}
+                placeholder="SORT BY"
+                _hover={{ cursor: "pointer" }}
               >
                 <option
                   style={{ backgroundColor: "black", color: "white" }}
                   value="asc"
                 >
-                  LOW TO HIGH RATING★
+                  LTH RATING ★
                 </option>
                 <option
                   style={{ backgroundColor: "black", color: "white" }}
                   value="dsc"
                 >
-                  HIGH TO LOW RATING★
+                 HTL RATING ★
                 </option>
                 <option
                   style={{ backgroundColor: "black", color: "white" }}
                   value="LTH"
                 >
-                  LOW TO HIGH PRICE
+                  LTH PRICE ₹
                 </option>
                 <option
                   style={{ backgroundColor: "black", color: "white" }}
                   value="HTL"
                 >
-                  HIGH TO LOW PRICE
+                  HTL PRICE ₹
                 </option>
               </Select>
             </Button>
@@ -271,135 +269,144 @@ const Products = () => {
         justifyContent="center"
         alignContent={"center"}
         margin="auto"
-      >
-        {loading && (
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="white"
-            color="blue.500"
-            size="xl"
-          />
-        )}
-      </Box>
+      ></Box>
 
       {/* sidebar && main content div */}
-      <Flex gap="0.5rem" className="media-query">
-        {filter && (
-          <Box className="sidebar">
-            <Accordion allowToggle>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      Category
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
 
-                <AccordionPanel pb={4}>
-                  <Box>
-                    <Checkbox
-                      size="lg"
-                      value="men"
-                      onChange={handleCategory}
-                      defaultChecked={category.includes("men")}
-                    />
-                    <label>Men</label>
-                  </Box>
-                  <Box>
-                    <Checkbox
-                      onChange={handleCategory}
-                      defaultChecked={category.includes("women")}
-                      value="women"
-                      type="checkbox"
-                    />
-                    <label>Women</label>
-                  </Box>
-                  <Box>
-                    <Checkbox
-                      onChange={handleCategory}
-                      defaultChecked={category.includes("kids")}
-                      value="kids"
-                      type="checkbox"
-                    />
-                    <label>Kids</label>
-                  </Box>
-                </AccordionPanel>
-              </AccordionItem>
-
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      Brand
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Box>
-                    <Checkbox
-                      size="lg"
-                      value="Nike"
-                      onChange={handlebyBrand}
-                      defaultChecked={category.includes("Nike")}
-                    />
-                    <label>Nike</label>
-                  </Box>
-                  <Box>
-                    <Checkbox
-                      onChange={handlebyBrand}
-                      defaultChecked={category.includes("Jordan")}
-                      value="Jordan"
-                    />
-                    <label>Jordan</label>
-                  </Box>
-                </AccordionPanel>
-              </AccordionItem>
-
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      Rating
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Box>
-                    <Checkbox
-                      size="lg"
-                      value="3"
-                      onChange={handleByRating}
-                      defaultChecked={rating.includes("3Above")}
-                    />
-                    <label>3 ★ & above</label>
-                  </Box>
-                  <Box>
-                    <Checkbox
-                      onChange={handleByRating}
-                      defaultChecked={rating.includes("4Above")}
-                      value="4"
-                    />
-                    <label>4 ★ & above</label>
-                  </Box>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
+      {loading ? (
+          <Box margin={"auto"} display={'flex'} justifyContent={'center'} alignContent={'center'} alignItems={'center'}>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="white"
+              color="blue.500"
+              size="xl"
+            />
           </Box>
-        )}
-        {/* products and all the things are listed here */}
+        ):(
+          <Flex gap="0.5rem" className="media-query">
+          {filter && (
+            <Box className="sidebar">
+              <Accordion allowToggle>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex="1" textAlign="left">
+                        Category
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+  
+                  <AccordionPanel pb={4}>
+                    <Box>
+                      <Checkbox
+                        size="lg"
+                        value="men"
+                        onChange={handleCategory}
+                        defaultChecked={category.includes("men")}
+                      />
+                      <label>Men</label>
+                    </Box>
+                    <Box>
+                      <Checkbox
+                        onChange={handleCategory}
+                        defaultChecked={category.includes("women")}
+                        value="women"
+                        type="checkbox"
+                      />
+                      <label>Women</label>
+                    </Box>
+                    <Box>
+                      <Checkbox
+                        onChange={handleCategory}
+                        defaultChecked={category.includes("kids")}
+                        value="kids"
+                        type="checkbox"
+                      />
+                      <label>Kids</label>
+                    </Box>
+                  </AccordionPanel>
+                </AccordionItem>
+  
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex="1" textAlign="left">
+                        Brand
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    <Box>
+                      <Checkbox
+                        size="lg"
+                        value="Nike"
+                        onChange={handlebyBrand}
+                        defaultChecked={category.includes("Nike")}
+                      />
+                      <label>Nike</label>
+                    </Box>
+                    <Box>
+                      <Checkbox
+                        onChange={handlebyBrand}
+                        defaultChecked={category.includes("Jordan")}
+                        value="Jordan"
+                      />
+                      <label>Jordan</label>
+                    </Box>
+                  </AccordionPanel>
+                </AccordionItem>
+  
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex="1" textAlign="left">
+                        Rating
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    <Box>
+                      <Checkbox
+                        size="lg"
+                        value="3"
+                        onChange={handleByRating}
+                        defaultChecked={rating.includes("3Above")}
+                      />
+                      <label>3 ★ & above</label>
+                    </Box>
+                    <Box>
+                      <Checkbox
+                        onChange={handleByRating}
+                        defaultChecked={rating.includes("4Above")}
+                        value="4"
+                      />
+                      <label>4 ★ & above</label>
+                    </Box>
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </Box>
+          )}
+          {/* products and all the things are listed here */}
+  
+          <Grid className="mainContent">
+            {data.length > 0 &&
+              data.map((item) => {
+                return <ProductDisplayBox key={item.id} item={item} />;
+              })}
+          </Grid>
+        </Flex>
+        )
+      
+      
+      }
 
-        <Grid className="mainContent">
-          {data.length > 0 &&
-            data.map((item) => {
-              return <ProductDisplayBox key={item.id} item={item} />;
-            })}
-        </Grid>
-      </Flex>
+
+     
 
       <Flex margin={"1rem"} gap={"1rem"} justifyContent={"center"}>
         <button
@@ -413,7 +420,9 @@ const Products = () => {
         >
           Previous
         </button>
-        <Button color={'white'} bg='rgb(84,98,111)'>{page}</Button>
+        <Button color={"white"} bg="rgb(84,98,111)">
+          {page}
+        </Button>
         <button
           style={{
             backgroundColor: "black",

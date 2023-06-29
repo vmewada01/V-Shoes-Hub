@@ -4,6 +4,13 @@
   width: 100%;
   
 }
+.dark-navbar{
+  background-color: rgb(26,32,44);
+  color: white;
+  padding: 0.3rem;
+  width: 100%;
+}
+
 .top-navbar-signup {
   justify-content: right;
   width: 95%;

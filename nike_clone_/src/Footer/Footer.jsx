@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Grid, Icon, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IconLink from './IconLink'
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { MdOutlinePersonPin } from 'react-icons/md';
@@ -7,6 +7,10 @@ import { FcLike } from "react-icons/fc";
 import "./footer.css"
 
 const Footer = () => {
+   
+  
+
+   
   return (
   
   <Box h={'300px'} bg={'black'} color={'white'} mt={'40px'}>
