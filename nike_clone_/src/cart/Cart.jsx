@@ -39,8 +39,8 @@ const Cart = () => {
        cartLength > 0  ? 
     <Flex w={{base:"100%", sm:"100%", md:"90%", lg:"80%"}} m={"auto"} gap={"10px"} pt={"20px"} direction={{base:"column", sm:"column", md: "column", lg:"row"}}>
           <Box w={{base:"80%", sm:"80%", md:"80%", lg:"65%"}}  textAlign={"left"} pl={"10px"} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}}>
-              <Box  mb={"20px"} p="5px">
-                  <Text border={"1px solid #f1f3f6"} fontWeight={"600"} pl={"20px"}>Your Cart ({cartLength})</Text>
+              <Box bg='rgb(84,98,111)' mb={"20px"} p="5px">
+                  <Text  fontWeight={"600"} pl={"20px"}>Your Cart ({cartLength})</Text>
               </Box>
              
               <Box >
@@ -70,7 +70,7 @@ const Cart = () => {
                                     <Button bg={"rgb(84,98,111)"} _hover={{bg:"black",color:"white"}} fontSize={"12px"} variant={"unstyled"} w={"100%"} onClick={()=>handleRemoveFromCart(elem.id)}>Remove</Button>
                                 </Box>
                                 <Box w={"50%"}>
-                                    <Button fontSize={"12px"} variant={"unstyled"} w={"100%"}>Add to Wishlist</Button>
+                                    <Button border={"1px solid #f1f3f6"} fontSize={"12px"} variant={"unstyled"} w={"100%"}>Add to Wishlist</Button>
                                 </Box>
                           </Flex>
                         </Box>
@@ -78,7 +78,7 @@ const Cart = () => {
                     }
               </Box> 
           </Box>
-          <Box  border={"1px solid #f1f3f6"}  w={{base:"80%", sm:"80%", md:"80%", lg:"35%"}} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}} textAlign={"left"} pl={"10px"}>
+          <Box bg=''  border={"1px solid #f1f3f6"}  w={{base:"80%", sm:"80%", md:"80%", lg:"35%"}} m={{base: "auto", sm:"auto", md:"auto", lg:"px"}} textAlign={"left"} pl={"10px"}>
               <Box  mb={"20px"} p="5px" textAlign={"left"} pl={"20px"}>
                   <Text fontWeight={"600"}>Order Summery</Text>
               </Box>

@@ -54,7 +54,13 @@ const SingleProduct = () => {
   //  const picture=  item?.images
   //  //console.log(picture[0].url)
 
-  // const [currentImg, setCurrentImg] = useState(picture[0])
+   const [currentImg, setCurrentImg] = useState(item.imageSrc)
+ 
+   const handleSetImage=(url)=>{
+     setCurrentImg(url)
+   }
+
+
 
   return (
     <Box w={{ lg: "80%" }} m="auto" pt={"20px"} pb="20px">
@@ -89,7 +95,7 @@ const SingleProduct = () => {
                 transition={"all 0.5s"}
                 _hover={{ transform: "scale(1.5)", transition: "all 0.6s" }}
                 display={"block"}
-                src={item.imageSrc}
+                src={currentImg}
               />
             </Box>
 
@@ -104,6 +110,7 @@ const SingleProduct = () => {
                       w={"20%"}
                       p="8px"
                       m={"auto"}
+                    onClick={()=> handleSetImage(ele.url)}
                     >
                       <Image
                         objectFit={"contain"}
