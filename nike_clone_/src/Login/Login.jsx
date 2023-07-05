@@ -93,8 +93,9 @@ export default function Login() {
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <Input
+               placeholder="George"
                 type="password"
-                placeholder=""
+            
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

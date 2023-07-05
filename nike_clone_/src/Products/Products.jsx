@@ -310,6 +310,7 @@ const Products = () => {
                     </Box>
                     <Box>
                       <Checkbox
+                      size="lg"
                         onChange={handleCategory}
                         defaultChecked={category.includes("women")}
                         value="women"
@@ -319,6 +320,7 @@ const Products = () => {
                     </Box>
                     <Box>
                       <Checkbox
+                       size="lg"
                         onChange={handleCategory}
                         defaultChecked={category.includes("kids")}
                         value="kids"
@@ -350,6 +352,7 @@ const Products = () => {
                     </Box>
                     <Box>
                       <Checkbox
+                        size="lg"
                         onChange={handlebyBrand}
                         defaultChecked={category.includes("Jordan")}
                         value="Jordan"
@@ -383,6 +386,7 @@ const Products = () => {
                         onChange={handleByRating}
                         defaultChecked={rating.includes("4Above")}
                         value="4"
+                        size="lg"
                       />
                       <label>4 ★ & above</label>
                     </Box>
