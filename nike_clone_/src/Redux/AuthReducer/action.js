@@ -4,13 +4,53 @@ import * as types from "./actionType"
 const getLogin=(payload)=>(dispatch)=> {
      dispatch({type: types.GET_LOGIN_REQUEST})
     
-     return axios.post("https://reqres.in/api/login", payload).then((res)=> {
+     return axios.post("https://v-nike-authentication-data.onrender.com/auth/login", payload).then((res)=> {
     
         dispatch({type: types.GET_LOGIN_SUCCESS,payload: res.data.token })
-     }).catch((err)=> {
+        return { status: types.GET_LOGIN_SUCCESS, message: res.data.message };
+      }).catch((err)=> {
         dispatch({type: types.GET_LOGIN_FAILURE, payload: err})
-     })
+        return {
+         status: types.GET_LOGIN_FAILURE,
+         message: err.response.data.message,
+       }
+      })
 }
 
+const getRegister=(payload)=>(dispatch)=> {
+    console.log(payload)
+   dispatch({type: types.GET_REGISTER_REQUEST})
+  
+   return axios.post("https://v-nike-authentication-data.onrender.com/auth/register", payload).then((res)=> {
+  
+      dispatch({type: types.GET_REGISTER_SUCCESS,payload: res.data.message })
+      return {status: types.GET_REGISTER_SUCCESS, message: res.data.message}
+   }).catch((err)=> {
+      dispatch({type: types.GET_REGISTER_FAILURE, payload: err})
+      return{status: types.GET_REGISTER_FAILURE, message: err.response.data.message }
+   })
+}
 
-export {getLogin}
+const forgetPassword=(payload)=>(dispatch)=> {
+   dispatch({type: types.FORGET_PASSWORD_REQUEST})
+  
+   return axios.patch("https://v-nike-authentication-data.onrender.com/auth/forgetPassword", payload).then((res)=> {
+  
+      dispatch({type: types.FORGET_PASSWORD_SUCCESS,payload: res.data.message })
+      return { status: types.FORGET_PASSWORD_SUCCESS, message: res.data.message };
+   }).catch((err)=> {
+      dispatch({type: types.FORGET_PASSWORD_FAILURE, payload: err})
+      return {
+         status: types.FORGET_PASSWORD_FAILURE,
+         message: err.response.data.message,
+       };
+   
+   })
+}
+
+ const logout = () => (dispatch) => {
+   dispatch({ type: types.LOGOUT });
+ };
+
+
+export {getLogin,forgetPassword,getRegister,logout}

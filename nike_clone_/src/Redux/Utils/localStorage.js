@@ -11,5 +11,11 @@ const getLocalData = (key) => {
     }
   };
   
-  export { getLocalData, saveLocalData };
+   const removeData= (key)=> {
+    if(key){
+        localStorage.removeItem(key);
+    }
+}
+
+  export { getLocalData, saveLocalData, removeData };
   

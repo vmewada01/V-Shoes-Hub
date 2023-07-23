@@ -12,6 +12,7 @@ import Checkout from '../checkout/Checkout'
 import SignupCard from '../Signup/SignupCard'
 import Login from '../Login/Login'
 import PrivateRoute from '../PrivateRoutes/PrivateRoute'
+import ForgetPassword from '../ForgetPassword/ForgetPassword'
 
 const AllRoutes = () => {
   return (
@@ -41,6 +42,7 @@ const AllRoutes = () => {
       } />
       <Route path="/signup" element={<SignupCard/>} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/forgetpassword" element={<ForgetPassword/>}/>
     </Routes>
     <Footer />
     </>

@@ -22,14 +22,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { checkLoginForm } from "../checkout/CheckProperty";
 import { color } from "framer-motion";
+import { GET_LOGIN_SUCCESS } from "../Redux/AuthReducer/actionType";
 
 export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loading = useSelector((store) => store.AuthReducer.isloading);
-  const error = useSelector((store) => store.AuthReducer.isError);
-  const auth = useSelector((store) => store.AuthReducer.isAuth);
+ 
   //console.log(auth)
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,16 +44,15 @@ export default function Login() {
   let validation = checkLoginForm(payload);
 
   const handleLoginFunc = () => {
+
     if (!validation.status) {
       toast(validation.message);
     } else if (validation.status) {
-      dispatch(getLogin(payload)).then(() => {
-        if (auth) {
+      dispatch(getLogin(payload)).then((r) => {
+        if (r.status===GET_LOGIN_SUCCESS) {
           navigate("/products", { replace: true });
-        } else if (error) {
-          toast("Something went wrong ..!!");
-        } else {
-          toast("Please enter the right Credentials ..!!");
+        } else{
+          toast(r.message)
         }
       });
       // console.log(auth)
@@ -85,7 +84,7 @@ export default function Login() {
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
-                placeholder="george.bluth@reqres.in"
+                placeholder="enter email....."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -93,7 +92,7 @@ export default function Login() {
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <Input
-               placeholder="George"
+               placeholder="enter password...."
                 type="password"
             
                 value={password}
@@ -107,7 +106,7 @@ export default function Login() {
                 justify={"space-between"}
               >
                 <Checkbox>Remember me</Checkbox>
-                <Link color={"blue.400"}>Forgot password?</Link>
+                <Link to="/forgetpassword" color={"blue.400"}>  <span style={{color: "blue"}}> Forgot password?</span>   </Link>
               </Stack>
               <Button
                 onClick={handleLoginFunc}
@@ -125,10 +124,10 @@ export default function Login() {
           <Stack pt={6}>
             <Text align={"center"}>
               Don't have an account ?
-              <Link to="https://reqres.in/" target="blank">
+              <Link to="/signup" target="blank">
                 {" "}
                 <span style={{ color: "blue" }}>
-                  Use Reqres Fake Api to login
+                   Sign Up
                 </span>
               </Link>
             </Text>
