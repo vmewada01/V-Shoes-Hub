@@ -1,10 +1,12 @@
 import axios from "axios"
 import * as types from "./actionType"
 
+const URL= process.env.REACT_APP_AUTH_URL
+
 const getLogin=(payload)=>(dispatch)=> {
      dispatch({type: types.GET_LOGIN_REQUEST})
     
-     return axios.post("https://v-nike-authentication-data.onrender.com/auth/login", payload).then((res)=> {
+     return axios.post(`${URL}/auth/login`, payload).then((res)=> {
     
         dispatch({type: types.GET_LOGIN_SUCCESS,payload: res.data.token })
         return { status: types.GET_LOGIN_SUCCESS, message: res.data.message };
@@ -21,7 +23,7 @@ const getRegister=(payload)=>(dispatch)=> {
     console.log(payload)
    dispatch({type: types.GET_REGISTER_REQUEST})
   
-   return axios.post("https://v-nike-authentication-data.onrender.com/auth/register", payload).then((res)=> {
+   return axios.post(`${URL}/auth/register`, payload).then((res)=> {
   
       dispatch({type: types.GET_REGISTER_SUCCESS,payload: res.data.message })
       return {status: types.GET_REGISTER_SUCCESS, message: res.data.message}
@@ -34,7 +36,7 @@ const getRegister=(payload)=>(dispatch)=> {
 const forgetPassword=(payload)=>(dispatch)=> {
    dispatch({type: types.FORGET_PASSWORD_REQUEST})
   
-   return axios.patch("https://v-nike-authentication-data.onrender.com/auth/forgetPassword", payload).then((res)=> {
+   return axios.patch(`${URL}/auth/forgetPassword`, payload).then((res)=> {
   
       dispatch({type: types.FORGET_PASSWORD_SUCCESS,payload: res.data.message })
       return { status: types.FORGET_PASSWORD_SUCCESS, message: res.data.message };
